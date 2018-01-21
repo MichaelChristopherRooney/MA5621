@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 // Note: loop termination condition is empty.
 // If i*i is > num it returns as num cannot possibly be a square number.
