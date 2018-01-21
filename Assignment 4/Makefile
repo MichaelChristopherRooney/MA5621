@@ -1,6 +1,6 @@
 OBJECTS = ex01 ex02 ex01numbers.o ex02sqrt.o
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -lm
 
 all: ex01numbers ex02sqrt
 	
