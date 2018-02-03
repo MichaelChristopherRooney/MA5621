@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h> // for pow
 
 void find_closest_ints(double num, double *low, double *high){
@@ -37,8 +38,13 @@ double find_sqrt(double num, int num_decimal_places){
 	return (high + low) / 2.0;
 }
 
+int run_tests();
+
 int main(int argc, char *argv[]){
-	if(argc != 3){
+	if(argc == 2 && strcmp("test", argv[1]) == 0){
+		int result = run_tests();
+		return result;
+	} else if(argc != 3){
 		printf("Expected usage: ./ex02 number num_decimal_places\n");
 		return 1;
 	}
