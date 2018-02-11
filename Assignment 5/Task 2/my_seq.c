@@ -10,6 +10,7 @@ static unsigned long long LAST;
 static int USE_PADDING = 0;
 static char PADDING_FMT[9] = "%000llu\n"; // second and third zero will be overwritten
 
+
 // Only option that getopt can handle is -w
 // If FIRST or INCREMENT are not passed they will have the default value set above.
 static void read_args(int argc, char *argv[]){
@@ -37,7 +38,6 @@ static void read_args(int argc, char *argv[]){
 	}
 }
 
-// TODO: if LAST will not be reached then use LAST - INCREMENT as size
 // The amount of zero padding depends on the value of LAST.
 // First figure out how many chars LAST needs as a string.
 // This is the padding size.

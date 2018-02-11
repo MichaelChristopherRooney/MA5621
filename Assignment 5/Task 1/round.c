@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-static char flag = 'K'; // default
-static long long value;
+static char UNIT_FLAG = 'K'; // default
+static long long VALUE;
 
 // Holds sizes for K, M, G, T, P, E in that order
 static unsigned long long format_sizes[] = {
@@ -13,7 +13,7 @@ static unsigned long long format_sizes[] = {
 // Given the flag simply looks up the format size from the precalulcated array.
 // Example: K = 1024, M = 1024*1024 and so on
 unsigned long long get_size_from_flag(){
-	switch(flag){
+	switch(UNIT_FLAG){
 	case 'K':
 		return format_sizes[0];
 	case 'M':
@@ -27,7 +27,7 @@ unsigned long long get_size_from_flag(){
 	case 'E':
 		return format_sizes[5];
 	default:
-		printf("Unknown size flag: %c\n", flag);
+		printf("Unknown size flag: %c\n", UNIT_FLAG);
 		exit(1);
 		break;
 	}
@@ -38,7 +38,7 @@ unsigned long long get_size_from_flag(){
 static char find_cloest_size(){
 	char sizes[] = { 'K', 'M', 'G', 'T', 'P', 'E' };
 	int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
-	unsigned long long val_copy = value;
+	unsigned long long val_copy = VALUE;
 	int i;
 	for(i = 0; i < num_sizes; i++){
 		val_copy = val_copy / 1024L;
@@ -54,11 +54,11 @@ static char find_cloest_size(){
 void parse_args(int argc, char *argv[]){
 	char c;
 	while((c = getopt(argc, argv, "EPTGMKh")) != -1){
-		flag = c;
+		UNIT_FLAG = c;
 	}
-	value = atol(argv[optind]);
-	if(flag == 'h'){
-		flag = find_cloest_size();
+	VALUE = atol(argv[optind]);
+	if(UNIT_FLAG == 'h'){
+		UNIT_FLAG = find_cloest_size();
 	}
 	
 }
@@ -66,8 +66,8 @@ void parse_args(int argc, char *argv[]){
 int main(int argc, char *argv[]){
 	parse_args(argc, argv);
 	unsigned long long size = get_size_from_flag();
-	double result = (double) value / (double) size;
-	printf("%llu = %.1f%c\n", value, result, flag);
+	double result = (double) VALUE / (double) size;
+	printf("%llu = %.1f%c\n", VALUE, result, UNIT_FLAG);
 	return 0;
 }
 

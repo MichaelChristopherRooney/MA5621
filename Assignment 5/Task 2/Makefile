@@ -6,6 +6,10 @@ CFLAGS = -Wall -lm
 all: my_seq.o
 	$(CC) -o $(EXEC_NAME) my_seq.o $(CFLAGS)
 
+test: all
+	chmod +x test.sh
+	./test.sh
+
 my_seq.o: my_seq.c
 	$(CC) -c my_seq.c $(CFLAGS)
 
