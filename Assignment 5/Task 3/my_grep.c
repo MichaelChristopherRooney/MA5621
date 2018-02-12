@@ -31,6 +31,10 @@ static void parse_args(int argc, char *argv[]){
 			break;
 		}
 	}
+	if(argc - optind != 1){
+		printf("ERROR: please provide a word to search for\n");
+		exit(1);
+	}
 	SEARCH_WORD = argv[optind];
 }
 

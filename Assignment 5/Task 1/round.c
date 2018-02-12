@@ -27,9 +27,7 @@ unsigned long long get_size_from_flag(){
 	case 'E':
 		return format_sizes[5];
 	default:
-		printf("Unknown size flag: %c\n", UNIT_FLAG);
-		exit(1);
-		break;
+		return format_sizes[0]; // default to 'K'
 	}
 }
 
@@ -53,8 +51,17 @@ static char find_cloest_size(){
 // If flag is 'h' then the cloest matching size format is found.
 void parse_args(int argc, char *argv[]){
 	char c;
+	opterr = 0;
 	while((c = getopt(argc, argv, "EPTGMKh")) != -1){
+		if(c == '?'){
+			printf("ERROR: unknown flag passed\n");
+			exit(1);			
+		}
 		UNIT_FLAG = c;
+	}
+	if(argc - optind != 1){
+		printf("ERROR: please provide a value and optionally a flag\n");
+		exit(1);
 	}
 	VALUE = atol(argv[optind]);
 	if(UNIT_FLAG == 'h'){

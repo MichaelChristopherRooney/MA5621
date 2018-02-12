@@ -18,6 +18,10 @@ static void read_args(int argc, char *argv[]){
 	while((c = getopt(argc, argv, "w")) != -1){
 		USE_PADDING = 1;
 	}
+	if(argc - optind == 0){
+		printf("ERROR: too few arguments passed\n");
+		exit(1);
+	}
 	int offset = optind - 1;
 	switch((argc - optind) + 1){
 	case 2:
