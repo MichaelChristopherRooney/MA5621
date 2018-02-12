@@ -38,18 +38,24 @@ static void pad_with_spaces(int size){
 }
 
 // Prints the part at the end of the line enclosed in "|"
+// Note that if its the last line and the line length is less than BLOCK_SIZE
+// we must print extra "." characters to fill out the empty space.
 static void print_char_part(int size){
 	if(size < BLOCK_SIZE){
 		pad_with_spaces(size);
 	}
 	printf("|");
 	int i;
-	for(i = 0; i < BLOCK_SIZE; i++){
+	for(i = 0; i < size; i++){
 		if(char_needs_replacement(BUFFER[i]) == 1){
 			printf(".");
 		} else {
 			printf("%c", BUFFER[i]);
 		}
+	}
+	// Prints out the remaining "."s for the last line
+	for(i = 0; i < BLOCK_SIZE - size; i++){
+		printf(".");
 	}
 	printf("|");
 }
@@ -89,5 +95,6 @@ int main(int argc, char *argv[]){
 		printf("\n");
 	}
 	printf("%08x\n", ((line_num - 1) * BLOCK_SIZE) + cur_line_size);
+	return 0;
 }
 
