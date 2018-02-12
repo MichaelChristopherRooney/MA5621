@@ -6,6 +6,10 @@ CFLAGS = -Wall -lm
 all: my_hexdump.o
 	$(CC) -o $(EXEC_NAME) my_hexdump.o $(CFLAGS)
 
+test: all
+	chmod +x test.sh
+	./test.sh
+
 my_hexdump.o: my_hexdump.c
 	$(CC) -c my_hexdump.c $(CFLAGS)
 
