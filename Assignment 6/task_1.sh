@@ -11,7 +11,7 @@ for num in $(seq $start 1 $end); do
 	sqrt=`echo "sqrt($num)" | bc`
 	is_prime=1 
 	for div in $(seq 2 1 $sqrt); do
-		res=`echo "$num % $div" | bc`
+		res=$(( num % div ))
 		if [ $res -eq 0 ]; then
 			is_prime=0
 			break
