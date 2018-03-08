@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# If a filepath with spaces is not escaped or enclosed with quotes we will have
+# more than 1 parameter.
+if [ "$#" -gt 1 ]; then
+	echo "ERROR: Expecting only 0 or 1 parameters"
+	echo "Did you forget to escape a filepath with spaces in it?"
+	exit
+fi
+
 # Use parameter if provided, else use ./
 # If paramater is provided ensure there is a "/" at the end.
 # It does not matter if there already is a "/" and we append
