@@ -12,7 +12,8 @@ c=$3
 # This is everything under the square root
 part_1=`echo "($b * $b) - (4 * $a * $c)" | bc -l`
 
-if [ $part_1 -lt 0 ]; then
+# Check if number is negative by looking for "-" as the first character.
+if [ "${part_1:0:1}" = "-" ]; then
 	echo "ERROR: part under square root cannot be negative"
 	exit
 fi
