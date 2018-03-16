@@ -15,6 +15,10 @@ if [ "$#" -ne 1 ]; then
 	dir="./"
 else
 	dir="$1/"
+	if [ ! -d $dir ]; then
+		echo "Provided directory does not exist"
+		exit
+	fi
 fi
 
 # Max depth = 0, don't search subdirectories

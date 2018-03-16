@@ -8,6 +8,12 @@ else
 	num_runs=$1
 fi
 
+# Validate file exists
+if [ ! -f simple_mc ]; then
+	echo "Cannot find simple_mc program - please ensure it is in this directory"
+	exit
+fi
+
 num_correct=0
 
 for num in $(seq 1 1 $num_runs); do
